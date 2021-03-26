@@ -18,4 +18,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^api/v1/', include(ROUTER.urls)),
     url(r'^$', TemplateView.as_view(template_name="customerdataapi/base.html")),
+
+    #Adding url for paypal payments.
+    url(r'paypal/', include('paypal.standard.ipn.urls')),
 ]

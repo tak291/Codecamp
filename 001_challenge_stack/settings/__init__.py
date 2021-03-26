@@ -41,6 +41,8 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'rest_framework',
     'customerdataapi',
+    #Added the paypal framework to workwith
+    'paypal.standard.ipn',
 )
 
 MIDDLEWARE = [
@@ -98,7 +100,8 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 
-ALLOWED_HOSTS = ['0.0.0.0',]
+#Allowed local host to connect to app.
+ALLOWED_HOSTS = ['0.0.0.0','localhost']
 
 # Rest framework
 
@@ -107,5 +110,16 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAdminUser',
     ],
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
-    'PAGE_SIZE': 10
+    'PAGE_SIZE': 10,
+
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ),
 }
+
+#Ading paypal information to test.
+
+PAYPAL_RECEIVER_EMAIL = 'youremail@mail.com'
+
+PAYPAL_TEST = True
