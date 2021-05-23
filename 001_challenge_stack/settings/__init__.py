@@ -42,6 +42,7 @@ INSTALLED_APPS = (
     'rest_framework',
     'customerdataapi',
     #Added the paypal framework to workwith
+    'paypalcheckoutsdk',
     'paypal.standard.ipn',
 )
 
