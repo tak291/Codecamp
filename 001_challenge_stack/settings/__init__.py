@@ -50,7 +50,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    #'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -121,6 +121,11 @@ REST_FRAMEWORK = {
 
 #Ading paypal information to test.
 
-PAYPAL_RECEIVER_EMAIL = 'youremail@mail.com'
+PAYPAL_RECEIVER_EMAIL = 'jporrasn@unbosque.edu.co'
 
 PAYPAL_TEST = True
+
+
+CSRF_COOKIE_SECURE = True
+CSRF_COOKIE_HTTPONLY = True
+SESSION_COOKIE_SECURE = True

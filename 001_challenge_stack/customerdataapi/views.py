@@ -49,6 +49,16 @@ class CustomerDataViewSet(viewsets.ModelViewSet):
     serializer_class = CustomerDataSerializer
     permission_classes = (permissions.AllowAny,)
 
+
+
+
+
+    def patch(self, request, *args, **kwargs):
+        info = CustomerData.objects.get()
+        data = request.data
+
+        info.subscription = data.get('SUBSCRIPTION')
+
 class PayPalClient:
     def __init__(self):
         self.client_id = "AdqJbdXIlVZsTzaLP8DXBaYaMZOm4HFsIHnFv8z3c_ppMuNpjDhCyqdrR829PbMMep6L8gJ_1iy_LpKy"
@@ -122,11 +132,11 @@ class CaptureOrder(PayPalClient):
     return response
 
 
-"""This driver function invokes the capture order function.
-Replace Order ID value with the approved order ID. """
-if __name__ == "__main__":
-  order_id = 'REPLACE-WITH-APPORVED-ORDER-ID'
-  CaptureOrder().capture_order(order_id, debug=True)
+# """This driver function invokes the capture order function.
+# Replace Order ID value with the approved order ID. """
+# if __name__ == "__main__":
+#   order_id = 'REPLACE-WITH-APPORVED-ORDER-ID'
+#   CaptureOrder().capture_order(order_id, debug=True)
 
 
 class GetOrder(PayPalClient):
@@ -148,11 +158,22 @@ class GetOrder(PayPalClient):
       print('\t{}: {}\tCall Type: {}'.format(link.rel, link.href, link.method))
     print ('Gross Amount: {} {}'.format(response.result.purchase_units[0].amount.currency_code,response.result.purchase_units[0].amount.value))
 
-"""This driver function invokes the get_order function with
-   order ID to retrieve sample order details. """
-if __name__ == '__main__':
-  GetOrder().get_order('REPLACE-WITH-VALID-ORDER-ID')  
+# """This driver function invokes the get_order function with
+#    order ID to retrieve sample order details. """
+# if __name__ == '__main__':
+#   GetOrder().get_order('REPLACE-WITH-VALID-ORDER-ID')  
 
 
-def payment(request):
-    return 
+# def payment(request):
+#     price = CustomerData.objects.get(id)
+#     datas = json.loads(request.body)
+#     orderID = datas['orderID']
+
+#     details = GetOrder.get_order(orderID)
+    
+
+#     price_details = float(details.result.purchase_units[0].amount.value)
+
+#     print(price_details)
+
+

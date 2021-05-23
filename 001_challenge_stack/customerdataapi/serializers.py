@@ -18,4 +18,4 @@ class CustomerDataSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = CustomerData
-        fields = ('id', 'data')
+        fields = ('id', 'data',)

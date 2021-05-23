@@ -45,9 +45,9 @@ Now, the message you are expecting to receive is an Instant Payment Notification
 
 ```
 curl -i \
-    -X POST -d "protection_eligibility=Eligible&address_status=confirmed&payer_id=1b2f7b83-7b4d-441d-a210-afaa970e5b76&payment_date=20%3A12%3A59+Jan+13%2C+2009+PST&payment_status=Completed&notify_version=2.6&verify_sign=AtkOfCXbDm2hu0ZELryHFjY-Vb7PAUvS6nMXgysbElEn9v-1XcmSoGtf&receiver_id=S8XGHLYDW9T3S&txn_type=express_checkout&item_name=basic&mc_currency=USD&payment_gross=19.95&shipping=0.0" \
+    -X POST -d "protection_eligibility=Eligible&address_status=confirmed&payer_id=d7f73fb3-7791-4fba-8d3c-861b80a0ceab&payment_date=20%3A12%3A59+Jan+13%2C+2009+PST&payment_status=Completed&notify_version=2.6&verify_sign=AtkOfCXbDm2hu0ZELryHFjY-Vb7PAUvS6nMXgysbElEn9v-1XcmSoGtf&receiver_id=S8XGHLYDW9T3S&txn_type=express_checkout&item_name=basic&mc_currency=USD&payment_gross=19.95&shipping=0.0" \
     -H "Content-Type: application/x-www-form-urlencoded" \
-    http://localhost:8000/payments/paypal/
+    http://localhost:8010/paypal/
 ```
 In this example you are getting a payment for 19.9 USD, for a customer with ID `1b2f7b83-7b4d-441d-a210-afaa970e5b76`. The payment status is `Completed` so it is a valid payment and the customer is buying the `basic` subscription tier.
 

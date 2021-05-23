@@ -23,9 +23,8 @@ ROUTER.register(r'customerdata', CustomerDataViewSet)
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^api/v1/', include(ROUTER.urls)),
-    url(r'^$', TemplateView.as_view(template_name="index.html")),
-    #url(r'customer/', customerList),
-    url(r'payment/', TemplateView.as_view(template_name="customerdataapi/pay.html")),
+    url(r'^$', TemplateView.as_view(template_name="customerdataapi/index.html")),
+    url(r'payments/paypal/', TemplateView.as_view(template_name="customerdataapi/pay.html")),
     #Adding url for paypal payments.
-    url(r'paypal/', TemplateView.as_view(template_name="customerdataapi/pay.html")),
+    url(r'paypal/', include(ROUTER.urls)),
 ]

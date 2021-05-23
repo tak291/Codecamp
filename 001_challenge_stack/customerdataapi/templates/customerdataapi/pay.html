@@ -47,13 +47,13 @@ const csrftoken = token('csrftoken');</script>
       return actions.order.create({
         purchase_units: [{
           amount: {
-            value: '19.00'
+            value: '19.95'
           }
         }]
       });
     },
     onApprove: function(data) {
-      return fetch('payment/', {
+      return fetch('payments/paypal/', {
         method: 'POST',
         headers: {
           'content-type': 'application/json',
