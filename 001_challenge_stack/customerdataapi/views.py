@@ -37,6 +37,10 @@ from paypalcheckoutsdk.orders import OrdersCaptureRequest
 import sys
 
 
+import json
+from django.db import transaction
+
+
 
 class CustomerDataViewSet(viewsets.ModelViewSet):
     """
@@ -49,10 +53,7 @@ class CustomerDataViewSet(viewsets.ModelViewSet):
     serializer_class = CustomerDataSerializer
     permission_classes = (permissions.AllowAny,)
 
-
-
-
-
+    #Trying to update the information on the json
     def patch(self, request, *args, **kwargs):
         info = CustomerData.objects.get()
         data = request.data
@@ -138,7 +139,7 @@ class CaptureOrder(PayPalClient):
 #   order_id = 'REPLACE-WITH-APPORVED-ORDER-ID'
 #   CaptureOrder().capture_order(order_id, debug=True)
 
-
+#Paypal view toget order
 class GetOrder(PayPalClient):
 
   #2. Set up your server to receive a call from the client
@@ -163,17 +164,10 @@ class GetOrder(PayPalClient):
 # if __name__ == '__main__':
 #   GetOrder().get_order('REPLACE-WITH-VALID-ORDER-ID')  
 
-
-# def payment(request):
-#     price = CustomerData.objects.get(id)
-#     datas = json.loads(request.body)
-#     orderID = datas['orderID']
-
-#     details = GetOrder.get_order(orderID)
-    
-
-#     price_details = float(details.result.purchase_units[0].amount.value)
-
-#     print(price_details)
-
+#Reading the json file and extracting the information.
+a_file = open("/home/kike/Documents/test/edunext-challenge-V4/edunext-challenge/Codecamp/001_challenge_stack/customerdataapi/initial_data.json", "r")
+json_object = json.load(a_file)
+for line in json_object:
+    print(json_object[7]['fields']['data'])
+   
 
