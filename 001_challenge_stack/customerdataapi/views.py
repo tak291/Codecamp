@@ -12,13 +12,12 @@ from rest_framework.response import Response
 
 from customerdataapi.models import CustomerData
 from customerdataapi.serializers import CustomerDataSerializer
-
+from paypal.standard.forms import PayPalPaymentsForm
 
 #importing modules for paypal
 
 from django.conf import settings
 from decimal import Decimal
-from paypal.standard.forms import PayPalPaymentsForm
 from django.views.decorators.csrf import csrf_exempt
 
 
@@ -35,11 +34,15 @@ from paypalcheckoutsdk.core import PayPalHttpClient, SandboxEnvironment
 from paypalcheckoutsdk.orders import OrdersGetRequest
 from paypalcheckoutsdk.orders import OrdersCaptureRequest
 import sys
+from django.views.generic import TemplateView
 
 
 import json
 from django.db import transaction
 
+from django.views.generic import FormView
+from django.urls import reverse
+from paypal.standard.forms import PayPalPaymentsForm
 
 
 class CustomerDataViewSet(viewsets.ModelViewSet):
@@ -53,12 +56,6 @@ class CustomerDataViewSet(viewsets.ModelViewSet):
     serializer_class = CustomerDataSerializer
     permission_classes = (permissions.AllowAny,)
 
-    #Trying to update the information on the json
-    def patch(self, request, *args, **kwargs):
-        info = CustomerData.objects.get()
-        data = request.data
-
-        info.subscription = data.get('SUBSCRIPTION')
 
 class PayPalClient:
     def __init__(self):
@@ -171,3 +168,16 @@ for line in json_object:
     print(json_object[7]['fields']['data'])
    
 
+def view_that_asks_for_money(request):
+
+    # What you want the button to do.
+    paypal_dict = {
+        "business": settings.PAYPAL_RECEIVER_EMAIL,
+        "amount": "19.95",
+        "item_name": "Subscription",
+        "invoice": "unique-invoice-id",
+        "notify_url": "http://0.0.0.0:8010/paypal" + reverse('paypal-ipn'),
+        "return_url": "http://0.0.0.0:8010/paypal/accepted",
+        "cancel_return": "http://0.0.0.0:8010/paypal/cancel",
+
+    }
