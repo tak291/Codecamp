@@ -4,6 +4,8 @@ from paypal.standard.ipn.signals import valid_ipn_received, payment_was_flagged
 from registration.models import RegistrationProfile
 from registration.views import ActivationView
 
+
+#Signals to receive payment information
 def payment_signal(sender, **kwargs):
     ipn_object = sender
     if ipn_object.payment_status == ST_PP_COMPLETED:

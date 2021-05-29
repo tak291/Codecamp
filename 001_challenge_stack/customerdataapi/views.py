@@ -176,8 +176,15 @@ def view_that_asks_for_money(request):
         "amount": "19.95",
         "item_name": "Subscription",
         "invoice": "unique-invoice-id",
+        'payment_date': timezone.now().strftime('%H:%M:%S %b %d, %Y') + ' CET',
         "notify_url": "http://0.0.0.0:8010/paypal" + reverse('paypal-ipn'),
         "return_url": "http://0.0.0.0:8010/paypal/accepted",
         "cancel_return": "http://0.0.0.0:8010/paypal/cancel",
 
     }
+    # Create the instance.
+    form = PayPalPaymentsForm(initial=paypal_dict)
+    context = {"form": form}
+    return render_to_response("customerdataapi/pay.html", context)
+
+    print(context)

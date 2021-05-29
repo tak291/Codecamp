@@ -20,7 +20,6 @@ ROUTER = DefaultRouter()
 ROUTER.register(r'customerdata', CustomerDataViewSet)
 
 
-#Import serialize class
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),

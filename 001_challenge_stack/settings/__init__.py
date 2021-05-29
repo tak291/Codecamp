@@ -102,7 +102,7 @@ STATIC_URL = '/static/'
 
 
 #Allowed local host to connect to app.
-ALLOWED_HOSTS = ['0.0.0.0','localhost']
+ALLOWED_HOSTS = ['0.0.0.0','localhost', ]
 
 # Rest framework
 
