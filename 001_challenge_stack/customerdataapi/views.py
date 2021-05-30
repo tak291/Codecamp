@@ -187,4 +187,4 @@ def view_that_asks_for_money(request):
     context = {"form": form}
     return render_to_response("customerdataapi/pay.html", context)
 
-    print(context)
+    print('payment_date')
